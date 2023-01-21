@@ -26,7 +26,7 @@ return new Promise((resolve, reject) => {
                 resolve('Claim success')
             } else if (xhr.status === 409 && res.message === 'Already claimed') {
                 GM_log("已经领过了")
-                reject('Repeate Claim')
+                reject('Repeat Claim')
             } else if (xhr.status === 401) {
                 GM_log("尚未登陆或登录已过期")
                 reject('Login timeout')

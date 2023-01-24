@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            自动领取GOG限免游戏
 // @namespace       https://bbs.tampermonkey.net.cn/
-// @version         1.0.0
+// @version         1.0.1
 // @author          Elm Forest
 // @description     自动领取GOG限免游戏
 // @icon            https://www.gog.com/favicon.ico
@@ -30,6 +30,9 @@ return new Promise((resolve, reject) => {
             } else if (xhr.status === 401) {
                 GM_log("尚未登陆或登录已过期")
                 reject('Login timeout')
+            } else if (xhr.status === 404 && res.message === 'Giveaway has ended') {
+                GM_log("当前还没有可以领取的游戏")
+                reject('Giveaway has ended')
             } else {
                 GM_log("领取失败")
                 GM_log("Response status:" + xhr.status)
